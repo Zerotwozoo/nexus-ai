@@ -58,3 +58,6 @@ coverage/
 
 # Kubernetes
 *.kubeconfig
+
+.vercel
+.env*
