@@ -20,7 +20,7 @@ class User(BaseModel):
     is_verified: Mapped[bool] = mapped_column(Boolean, default=False)
     is_2fa_enabled: Mapped[bool] = mapped_column(Boolean, default=False)
     two_factor_secret: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
 
     oauth_accounts = relationship("OAuthAccount", back_populates="user", cascade="all, delete")
     sessions = relationship("Session", back_populates="user", cascade="all, delete")
@@ -88,7 +88,7 @@ class AIConversation(BaseModel):
     title: Mapped[str | None] = mapped_column(Text, nullable=True)
     model: Mapped[str] = mapped_column(String(50), default="gpt-4o")
     system_prompt: Mapped[str | None] = mapped_column(Text, nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
     token_count: Mapped[int] = mapped_column(Integer, default=0)
 
     messages = relationship("AIMessage", back_populates="conversation", cascade="all, delete", order_by="AIMessage.created_at")
@@ -104,7 +104,7 @@ class AIMessage(BaseModel):
     tool_call_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     attachments: Mapped[list] = mapped_column(JSONB, default=list)
     tokens: Mapped[int] = mapped_column(Integer, default=0)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
 
     conversation = relationship("AIConversation", back_populates="messages")
 
@@ -216,7 +216,7 @@ class Document(BaseModel):
     page_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
     ocr_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     ai_summary: Mapped[str | None] = mapped_column(Text, nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
 
 
 # ─── Calendar ───────────────────────────────────────────────
@@ -236,7 +236,7 @@ class CalendarEvent(BaseModel):
     recurrence_rule: Mapped[str | None] = mapped_column(Text, nullable=True)
     google_event_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     calendar_provider: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
 
 
 # ─── Finance ────────────────────────────────────────────────
@@ -436,4 +436,4 @@ class ActivityLog(BaseModel):
     action: Mapped[str] = mapped_column(String(50), nullable=False)
     resource_type: Mapped[str | None] = mapped_column(String(50), nullable=True)
     resource_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)
-    metadata: Mapped[dict] = mapped_column(JSONB, default=dict)
+    meta_data: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
