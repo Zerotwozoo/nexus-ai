@@ -1,0 +1,23 @@
+{
+  "name": "@nexus/api-client",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "eslint . --ext ts,tsx",
+    "typecheck": "tsc --noEmit",
+    "generate": "openapi-typescript http://localhost:8000/openapi.json -o ./src/generated/api.ts"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.62.0",
+    "react": "^19.0.0"
+  },
+  "dependencies": {
+    "@nexus/kernel": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "openapi-typescript": "^7.4.0"
+  }
+}

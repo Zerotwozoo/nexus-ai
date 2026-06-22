@@ -1,0 +1,36 @@
+{
+  "name": "nexus-ai",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Nexus AI — AI-powered productivity ecosystem",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:web": "turbo dev --filter=@nexus/web",
+    "dev:backend": "cd backend && poetry run uvicorn src.main:app --reload --port 8000",
+    "build": "turbo build",
+    "build:web": "turbo build --filter=@nexus/web",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean && rm -rf node_modules",
+    "test": "turbo test",
+    "test:e2e": "turbo test:e2e",
+    "db:migrate": "cd backend && poetry run alembic upgrade head",
+    "db:rollback": "cd backend && poetry run alembic downgrade -1",
+    "db:revision": "cd backend && poetry run alembic revision --autogenerate -m",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "turbo": "^2.3.3"
+  }
+}
