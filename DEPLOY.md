@@ -27,29 +27,29 @@ Vercel (Free)          Render (Free)           Supabase (Free)
 ```bash
 # Push ke GitHub dulu
 cd nexus-ai
-git init
-git add .
-git commit -m "Initial commit"
-gh repo create nexus-ai --public --push
+git remote add origin https://github.com/NAMA_KAMU/nexus-ai.git
+git branch -M main
+git push -u origin main
 ```
 
 - Buka https://vercel.com/new
 - Import repository `nexus-ai`
-- Set:
-  - **Root Directory:** `apps/web`
-  - **Framework:** Next.js
-  - **Build Command:** `pnpm build`
-  - **Install Command:** `pnpm install`
+- **JANGAN ubah Root Directory** (biarkan default `/`)
+- **JANGAN ubah Framework** (biarkan otomatis)
+- Vercel akan otomatis baca `vercel.json` di root project
 - Tambah Environment Variables:
   - `NEXT_PUBLIC_API_URL` = `https://nexus-api.onrender.com` (nanti diisi)
   - `NEXT_PUBLIC_WS_URL` = `wss://nexus-api.onrender.com`
 - Deploy!
 
+> **⚠️ Penting:** Jangan set Root Directory ke `apps/web` karena `workspace:*` butuh akses ke root monorepo!
+
 ### Cara 2: Vercel CLI
 
 ```bash
 npm install -g vercel
-cd apps/web
+vercel login
+cd nexus-ai
 vercel --prod
 ```
 
